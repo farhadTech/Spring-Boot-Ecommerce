@@ -1,4 +1,4 @@
-package com.ecommerce.sb_ecommerce;
+package com.sb_ecommerce.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,3 +12,4 @@ public class SbEcommerceApplication {
 		SpringApplication.run(SbEcommerceApplication.class, args);
 	}
 }
+
