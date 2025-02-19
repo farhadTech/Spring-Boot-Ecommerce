@@ -1,20 +1,19 @@
 package com.ecommerce.sb_ecommerce.controller; // Defines the package where this controller resides.
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.ecommerce.sb_ecommerce.response.HelloResponse; // Imports the response DTO
+import org.springframework.web.bind.annotation.*;
 
 // Marks this class as a REST controller in Spring Boot.
-// This means it can handle HTTP requests and return responses.
+// It allows handling HTTP requests and returning responses.
 @RestController
 public class HelloController {
 
     // Handles HTTP GET requests to "/hello".
-    // When accessed, it returns the string "Hello World!" as a response.
+    // When accessed, it returns a JSON response containing "Hello World!".
     @GetMapping("/hello")
-    public String hello() {
-        return "Hello World!";
+    public HelloResponse hello() {
+        // Returns an instance of HelloResponse containing the message
+        return new HelloResponse("Hello World");
     }
 
     // Handles HTTP POST requests to "/hello".
