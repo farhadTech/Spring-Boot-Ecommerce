@@ -2,12 +2,12 @@ package com.sb_ecommerce.project.controller;
 
 // Import necessary classes
 import com.sb_ecommerce.project.model.Category;
+import com.sb_ecommerce.project.service.CategoryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,17 +16,21 @@ import java.util.List;
  */
 @RestController // Marks this class as a REST controller, meaning it handles HTTP requests.
 public class CategoryController {
+    private final CategoryService categoryService;
 
-    // A list to store category objects (acting as an in-memory database for now).
-    private List<Category> categories = new ArrayList<Category>();
+    // Constructor injection.
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     /**
      * Endpoint to retrieve all categories.
      * @return A list of all stored categories.
      */
+
     @GetMapping("/api/public/categories") // Maps HTTP GET requests to this method.
     public List<Category> getAllCategories() {
-        return categories; // Returns the list of categories as a JSON response.
+        return categoryService.getAllCategories(); // Returns the list of categories as a JSON response.
     }
 
     /**
@@ -34,9 +38,10 @@ public class CategoryController {
      * @param category The category object sent in the request body.
      * @return A success message.
      */
+
     @PostMapping("/api/public/categories") // Maps HTTP POST requests to this method.
     public String createCategory(@RequestBody Category category) {
-        categories.add(category); // Adds the received category object to the list.
+        categoryService.createCategory(category); // Adds the received category object to the list.
         return "Category added successfully."; // Returns a success message.
     }
 
