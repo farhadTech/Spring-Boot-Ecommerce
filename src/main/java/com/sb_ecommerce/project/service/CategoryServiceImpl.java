@@ -14,6 +14,8 @@ public class CategoryServiceImpl implements CategoryService {
     // Creates a list to store Category objects.
     // This serves as an in-memory storage for categories.
 
+    private Long nextId = 1L;
+
     @Override
     public List<Category> getAllCategories() {
         return categories;
@@ -23,6 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(Category category) {
+        category.setCategoryId(nextId++);
         categories.add(category);
         // Adds a new category to the list.
     }
