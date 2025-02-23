@@ -3,10 +3,7 @@ package com.sb_ecommerce.project.controller;
 // Import necessary classes
 import com.sb_ecommerce.project.model.Category;
 import com.sb_ecommerce.project.service.CategoryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,4 +46,10 @@ public class CategoryController {
      * We use @PostMapping here because POST requests are used to create new resources on the server.
      * In this case, it allows the client to add a new category.
      */
+
+    @DeleteMapping("/api/admin/categories/{categoryId}")
+    public String deleteCategory(@PathVariable Long categoryId) {
+        String status = categoryService.deleteCategory(categoryId);
+        return status;
+    }
 }

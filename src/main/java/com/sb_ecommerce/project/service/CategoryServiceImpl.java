@@ -1,10 +1,9 @@
-package com.sb_ecommerce.project.service; // Declares the package this class belongs to.
+package com.sb_ecommerce.project.service;
 
-import com.sb_ecommerce.project.model.Category; // Imports the Category model class.
-import org.springframework.stereotype.Service; // Imports the @Service annotation for marking this as a service class.
-
-import java.util.ArrayList; // Imports ArrayList from Java's util package for storing category objects.
-import java.util.List; // Imports List interface to define the type of collection used.
+import com.sb_ecommerce.project.model.Category;
+import org.springframework.stereotype.Service;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service // Marks this class as a Spring service component, enabling dependency injection.
 public class CategoryServiceImpl implements CategoryService {
@@ -28,6 +27,16 @@ public class CategoryServiceImpl implements CategoryService {
         category.setCategoryId(nextId++);
         categories.add(category);
         // Adds a new category to the list.
+    }
+
+    @Override
+    public String deleteCategory(Long categoryId) {
+        Category category = categories.stream()
+                .filter(c -> c.getCategoryId().equals(categoryId))
+                .findFirst().get();
+
+        categories.remove(category);
+        return "Category with categoryId: " + categoryId + " deleted";
     }
 }
 
