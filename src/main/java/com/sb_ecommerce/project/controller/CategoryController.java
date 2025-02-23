@@ -28,9 +28,10 @@ public class CategoryController {
      * @return A list of all stored categories.
      */
 
-    @GetMapping("/api/public/categories") // Maps HTTP GET requests to this method.
-    public List<Category> getAllCategories() {
-        return categoryService.getAllCategories(); // Returns the list of categories as a JSON response.
+    @GetMapping("/api/public/categories")
+    public ResponseEntity<List<Category>> getAllCategories() {
+        List <Category> categories = categoryService.getAllCategories();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
     /**
@@ -39,10 +40,10 @@ public class CategoryController {
      * @return A success message.
      */
 
-    @PostMapping("/api/public/categories") // Maps HTTP POST requests to this method.
-    public String createCategory(@RequestBody Category category) {
-        categoryService.createCategory(category); // Adds the received category object to the list.
-        return "Category added successfully."; // Returns a success message.
+    @PostMapping("/api/public/categories")
+    public ResponseEntity<String> createCategory(@RequestBody Category category) {
+        categoryService.createCategory(category);
+        return new ResponseEntity<> ("Category created", HttpStatus.CREATED);
     }
 
     /*
@@ -54,7 +55,8 @@ public class CategoryController {
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
         try {
             String status = categoryService.deleteCategory(categoryId);
-            return new ResponseEntity<>(status, HttpStatus.OK);
+//            return new ResponseEntity<>(status, HttpStatus.OK);
+            return ResponseEntity.ok(status);
         } catch(ResponseStatusException e) {
             return new ResponseEntity<>(e.getReason(), e.getStatusCode());
         }
