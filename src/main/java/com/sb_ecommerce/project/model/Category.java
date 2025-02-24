@@ -5,9 +5,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
 
-/* Entity represents a table in JPA, Earlier it was POJO(Plain Old Java Object, now it becomes entity.
-* Every Entity must inherit one @Embedded Id */
-
 @Entity(name = "Categories") // changing table name
 public class Category {
     @Id

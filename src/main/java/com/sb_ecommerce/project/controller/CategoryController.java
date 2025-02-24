@@ -1,6 +1,5 @@
 package com.sb_ecommerce.project.controller;
 
-// Import necessary classes
 import com.sb_ecommerce.project.model.Category;
 import com.sb_ecommerce.project.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +17,17 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-
-    /**
-     * Endpoint to retrieve all categories.
-     * @return A list of all stored categories.
-     */
-
     @GetMapping("/public/categories")
     public ResponseEntity<List<Category>> getAllCategories() {
         List <Category> categories = categoryService.getAllCategories();
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
-    /**
-     * Endpoint to create a new category.
-     * @param category The category object sent in the request body.
-     * @return A success message.
-     */
-
     @PostMapping("/public/categories")
     public ResponseEntity<String> createCategory(@RequestBody Category category) {
         categoryService.createCategory(category);
         return new ResponseEntity<> ("Category created", HttpStatus.CREATED);
     }
-
-    /*
-     * We use @PostMapping here because POST requests are used to create new resources on the server.
-     * In this case, it allows the client to add a new category.
-     */
 
     @DeleteMapping("/admin/categories/{categoryId}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {

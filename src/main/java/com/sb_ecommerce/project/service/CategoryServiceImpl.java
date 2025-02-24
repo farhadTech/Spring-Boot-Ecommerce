@@ -66,12 +66,3 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 }
-
-/*
-   Summary:
-   - This class is a service that handles business logic related to categories.
-   - It implements the `CategoryService` interface, ensuring consistency in service method definitions.
-   - The @Service annotation registers it as a Spring-managed bean, allowing automatic dependency injection.
-   - It currently uses an ArrayList for storage, meaning data is not persistent.
-   - In a real application, this would interact with a database via a repository layer.
-*/
