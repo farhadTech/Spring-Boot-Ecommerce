@@ -61,4 +61,15 @@ public class CategoryController {
             return new ResponseEntity<>(e.getReason(), e.getStatusCode());
         }
     }
+
+    @PutMapping("/api/public/categories")
+    public ResponseEntity<String> updateCategory(@RequestBody Category category) {
+        try {
+            Category savedCategory = categoryService.updateCategory(category);
+            return new ResponseEntity<> ("Category updated", HttpStatus.OK);
+        } catch(ResponseStatusException e) {
+            return new ResponseEntity<> (e.getReason(), e.getStatusCode());
+        }
+    }
 }
+
