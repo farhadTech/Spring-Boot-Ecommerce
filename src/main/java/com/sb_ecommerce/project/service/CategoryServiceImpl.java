@@ -41,9 +41,8 @@ public class CategoryServiceImpl implements CategoryService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not Found"));
 
         categories.remove(category);
-        return "Category with categoryId: " + categoryId + " deleted";
+        return "Category with category Id: " + categoryId + " deleted";
     }
-
 
     @Override
     public Category updateCategory(Category category, Long categoryId) {
