@@ -15,12 +15,9 @@ import java.util.List;
 @RequestMapping("/api")
 public class CategoryController {
 
+    @Autowired
     private CategoryService categoryService;
 
-//    Constructor injection.
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
 
     /**
      * Endpoint to retrieve all categories.
