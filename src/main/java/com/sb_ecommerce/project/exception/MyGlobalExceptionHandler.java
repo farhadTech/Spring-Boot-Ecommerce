@@ -1,5 +1,4 @@
 package com.sb_ecommerce.project.exception;
-
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +30,11 @@ public class MyGlobalExceptionHandler {
     public ResponseEntity<String> myResourceNotFoundException(ResourceNotFoundException e) {
         String message = e.getMessage();
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> myAPIException(APIException e) {
+        String message = e.getMessage();
+        return new ResponseEntity<> (message, HttpStatus.BAD_REQUEST);
     }
 }
