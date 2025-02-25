@@ -27,7 +27,7 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getAllCategories() {
         List <Category> categories = categoryRepository.findAll();
         if(categories.isEmpty())
-            throw new APIException("No Category created till now");
+            throw new APIException("No Category created till now.");
         return categories;
     }
 
