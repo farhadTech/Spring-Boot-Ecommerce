@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @Entity(name = "Categories") // changing table name
 public class Category {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
 
     @NotBlank
-    @Size(min = 3, message="Category name must contain at least 5 characters.")
+    @Size(min = 5, message="Category name must contain at least 5 characters.")
     private String categoryName;
 }

@@ -3,8 +3,10 @@ package com.sb_ecommerce.project.service;
 import com.sb_ecommerce.project.exception.APIException;
 import com.sb_ecommerce.project.exception.ResourceNotFoundException;
 import com.sb_ecommerce.project.model.Category;
+import com.sb_ecommerce.project.payload.CategoryDTO;
 import com.sb_ecommerce.project.payload.CategoryResponse;
 import com.sb_ecommerce.project.repositories.CategoryRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -16,20 +18,26 @@ import java.util.Optional;
 
 @Service // Marks this class as a Spring service component, enabling dependency injection.
 public class CategoryServiceImpl implements CategoryService {
-    // Implements the CategoryService interface, meaning it must define all its methods.
-
-    private final List<Category> categories = new ArrayList<>();
-//    private Long nextId = 1L;
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public CategoryResponse getAllCategories() {
         List <Category> categories = categoryRepository.findAll();
         if(categories.isEmpty())
             throw new APIException("No Category created till now.");
-        return categories;
+
+        List<CategoryDTO> categoryDTOS = categories.stream()
+                .map(category -> modelMapper.map(category, CategoryDTO.class))
+                .toList();
+
+        CategoryResponse categoryResponse = new CategoryResponse();
+        categoryResponse.setContent(categoryDTOS);
+        return categoryResponse;
     }
 
     @Override
