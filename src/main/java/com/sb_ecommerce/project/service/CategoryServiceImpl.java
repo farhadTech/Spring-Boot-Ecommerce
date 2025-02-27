@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
         Pageable pageDetails = PageRequest.of(pageNumber, pageSize);
         Page<Category> categoryPage = categoryRepository.findAll(pageDetails);
         List <Category> categories = categoryPage.getContent();
-        
+
         if(categories.isEmpty())
             throw new APIException("No Category created till now.");
 
