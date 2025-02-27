@@ -8,6 +8,9 @@ import com.sb_ecommerce.project.payload.CategoryResponse;
 import com.sb_ecommerce.project.repositories.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,8 +29,11 @@ public class CategoryServiceImpl implements CategoryService {
     private ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public CategoryResponse getAllCategories() {
-        List <Category> categories = categoryRepository.findAll();
+    public CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize) throws APIException {
+        Pageable pageDetails = PageRequest.of(pageNumber, pageSize);
+        Page<Category> categoryPage = categoryRepository.findAll(pageDetails);
+        List <Category> categories = categoryPage.getContent();
+        
         if(categories.isEmpty())
             throw new APIException("No Category created till now.");
 
